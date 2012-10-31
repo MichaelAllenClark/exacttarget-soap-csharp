@@ -8,18 +8,26 @@ namespace exacttarget_soap_csharp
 {
     partial class Tester
     {
-        public static void CreateDateExtension_Sendable(SoapClient soapClient)
+        public static void CreateDateExtension(SoapClient soapClient,
+            string iDataExtensionName,
+            string iDataExtensionCustomerKey)
         {
             DataExtension de = new DataExtension();
-            de.Name = "API Created DE " + Guid.NewGuid().ToString();
-            de.CustomerKey = Guid.NewGuid().ToString();
+            de.Name = iDataExtensionName;
+            de.CustomerKey = iDataExtensionCustomerKey;
+
             de.IsSendable = true;
             de.IsSendableSpecified = true;
-            de.SendableDataExtensionField = new DataExtensionField();
-            de.SendableDataExtensionField.Name = "EMAIL";
-            de.SendableSubscriberField = new ExactTargetSOAPAPI.Attribute();
-            de.SendableSubscriberField.Name = "Email Address";
-            List<DataExtensionField> fields = new List<DataExtensionField>();
+
+            DataExtensionField def = new DataExtensionField();
+            def.Name = "EMAIL";
+            de.SendableDataExtensionField = def;
+
+            //Sendable SubscriberField will be "Email Address" by default
+            //If SubscriberKey option is enabled then value needs to be "Subscriber Key"
+            ExactTargetSOAPAPI.Attribute attr = new ExactTargetSOAPAPI.Attribute();
+            attr.Name = "Email Address";
+            de.SendableSubscriberField = attr;            
 
             DataExtensionField emailField = new DataExtensionField();
             emailField.Name = "EMAIL";
@@ -32,14 +40,12 @@ namespace exacttarget_soap_csharp
             emailField.MaxLength = 50;
             emailField.MaxLengthSpecified = true;
 
-            DataExtensionField fnameField = new DataExtensionField();
-            fnameField = new DataExtensionField();
+            DataExtensionField fnameField = new DataExtensionField();            
             fnameField.Name = "FIRST NAME";
             fnameField.FieldType = DataExtensionFieldType.Text;
             fnameField.FieldTypeSpecified = true;
 
-            DataExtensionField lnameField = new DataExtensionField();
-            lnameField = new DataExtensionField();
+            DataExtensionField lnameField = new DataExtensionField();            
             lnameField.Name = "LAST NAME";
             lnameField.FieldType = DataExtensionFieldType.Text;
             lnameField.FieldTypeSpecified = true;
@@ -55,9 +61,9 @@ namespace exacttarget_soap_csharp
             Console.WriteLine("Request ID: " + sRequestId);
             foreach (CreateResult cr in aoResults)
             {
-                Console.WriteLine(cr.StatusCode);
-                Console.WriteLine(cr.ErrorCode);
-                Console.WriteLine(cr.StatusMessage);
+                Console.WriteLine("StatusCode: " + cr.StatusCode);
+                Console.WriteLine("ErrorCode: " + cr.ErrorCode);
+                Console.WriteLine("StatusMessage: " + cr.StatusMessage);
             }
         }
     }

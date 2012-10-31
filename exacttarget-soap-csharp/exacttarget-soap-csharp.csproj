@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -45,8 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateDataExtension_Sendable_NoSubscriberKey.cs" />
+    <Compile Include="CreateDataExtension.cs" />
+    <Compile Include="CreateEmailSendDefinition.cs" />
+    <Compile Include="CreateImportDefinition.cs" />
     <Compile Include="CreateTriggeredSend.cs" />
+    <Compile Include="PerformEmailSendDefinition.cs" />
+    <Compile Include="PerformImportDefinition.cs" />
+    <Compile Include="RetrieveImportResultsSummary.cs" />
+    <Compile Include="RetrieveSend.cs" />
     <Compile Include="Service References\ExactTargetSOAPAPI\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -54,11 +61,13 @@
     </Compile>
     <Compile Include="Tester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UpdateSubscriber.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="Service References\ExactTargetSOAPAPI\etframework.wsdl" />
     <None Include="Service References\ExactTargetSOAPAPI\ETFrameworkFault.xsd" />
     <None Include="Service References\ExactTargetSOAPAPI\exacttarget_soap_csharp.ExactTargetSOAPAPI.APIObject.datasource">
