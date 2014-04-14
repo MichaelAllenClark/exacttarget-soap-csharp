@@ -50,6 +50,7 @@
     <Compile Include="CreateEmailSendDefinition.cs" />
     <Compile Include="CreateImportDefinition.cs" />
     <Compile Include="CreateTriggeredSend.cs" />
+    <Compile Include="ExtractDataExtension.cs" />
     <Compile Include="PerformEmailSendDefinition.cs" />
     <Compile Include="PerformImportDefinition.cs" />
     <Compile Include="RetrieveImportResultsSummary.cs" />

@@ -48,7 +48,8 @@ namespace exacttarget_soap_csharp
             //CreateEmailSendDefinition(soapClient, "API Created EmailSendDefinition-CSharp", "API Created ESD-CSharp", 3113962, "2239", "ad36ce5a-7f1a-46ac-bcfe-e99027672e72");
             //PerformEmailSendDefinition(soapClient, "API Created ESD-CSharp");
             //RetrieveSend(soapClient, "11417771");
-            UpdateSubscriber(soapClient, "help@exacttarget.com", 1947888);
+            //UpdateSubscriber(soapClient, "help@exacttarget.com", 1947888);
+            ExtractDataExtension(soapClient, "Bademails", "CSharpExtractDE.csv");
 
             Console.WriteLine("Press enter to continue");
             Console.ReadLine();
