@@ -1645,6 +1645,7 @@
               <xsd:element minOccurs="0" maxOccurs="1" name="Unlock" type="xsd:boolean" />
               <xsd:element minOccurs="0" maxOccurs="1" name="BusinessUnit" type="xsd:int" />
               <xsd:element minOccurs="0" maxOccurs="1" name="DefaultBusinessUnit" type="xsd:int" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="DefaultApplication" type="xsd:string" />
               <xsd:element minOccurs="0" maxOccurs="1" name="Locale" type="tns:Locale" />
               <xsd:element minOccurs="0" maxOccurs="1" name="TimeZone" type="tns:TimeZone" />
               <xsd:element minOccurs="0" maxOccurs="1" name="DefaultBusinessUnitObject" type="tns:BusinessUnit" />
@@ -1806,6 +1807,9 @@
               <xsd:element minOccurs="0" maxOccurs="1" name="CharacterSet" type="xsd:string" />
               <xsd:element minOccurs="0" maxOccurs="1" name="HasDynamicSubjectLine" type="xsd:boolean" />
               <xsd:element minOccurs="0" maxOccurs="1" name="ContentCheckStatus" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="SyncTextWithHTML" type="xsd:boolean" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="PreHeader" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="IsApproved" type="xsd:boolean" />
             </xsd:sequence>
           </xsd:extension>
         </xsd:complexContent>
@@ -1822,6 +1826,15 @@
               <xsd:element minOccurs="0" maxOccurs="1" name="Layout" type="tns:LayoutType" />
               <xsd:element minOccurs="0" maxOccurs="1" name="IsDynamicContent" type="xsd:boolean" />
               <xsd:element minOccurs="0" maxOccurs="1" name="IsSurvey" type="xsd:boolean" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="BackgroundColor" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="BorderColor" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="BorderWidth" type="xsd:int" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="Cellpadding" type="xsd:int" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="Cellspacing" type="xsd:int" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="Width" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="FontFamily" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="HasFontSize" type="xsd:boolean" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="IsLocked" type="xsd:boolean" />
             </xsd:sequence>
           </xsd:extension>
         </xsd:complexContent>
@@ -1869,6 +1882,7 @@
           <xsd:enumeration value="Survey" />
           <xsd:enumeration value="ForwardedEmail" />
           <xsd:enumeration value="ForwardedEmailOptIn" />
+          <xsd:enumeration value="DeliveredEvent" />
         </xsd:restriction>
       </xsd:simpleType>
       <xsd:complexType name="OpenEvent">
@@ -1890,7 +1904,12 @@
       </xsd:complexType>
       <xsd:complexType name="UnsubEvent">
         <xsd:complexContent mixed="false">
-          <xsd:extension base="tns:TrackingEvent" />
+          <xsd:extension base="tns:TrackingEvent">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="List" type="tns:List" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="IsMasterUnsubscribed" type="xsd:boolean" />
+            </xsd:sequence>
+          </xsd:extension>
         </xsd:complexContent>
       </xsd:complexType>
       <xsd:complexType name="ClickEvent">
@@ -1935,6 +1954,11 @@
               <xsd:element minOccurs="0" maxOccurs="1" name="OptInSubscriberKey" type="xsd:string" />
             </xsd:sequence>
           </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="DeliveredEvent">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:TrackingEvent" />
         </xsd:complexContent>
       </xsd:complexType>
       <xsd:complexType name="Subscriber">
@@ -2290,6 +2314,9 @@
               <xsd:element minOccurs="0" maxOccurs="1" name="SendSourceDataExtension" type="tns:DataExtension" />
               <xsd:element minOccurs="0" maxOccurs="1" name="IsAlwaysOn" type="xsd:boolean" />
               <xsd:element minOccurs="0" maxOccurs="1" name="DisableOnEmailBuildError" type="xsd:boolean" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="PreHeader" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="ReplyToAddress" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="ReplyToDisplayName" type="xsd:string" />
             </xsd:sequence>
           </xsd:extension>
         </xsd:complexContent>
@@ -2510,6 +2537,8 @@
               <xsd:element minOccurs="0" maxOccurs="1" name="DataRetentionPeriodLength" type="xsd:short" />
               <xsd:element minOccurs="0" maxOccurs="1" name="DataRetentionPeriodUnitOfMeasure" type="tns:RecurrenceTypeEnum" />
               <xsd:element minOccurs="0" maxOccurs="1" name="ReplyManagementRuleSet" type="tns:APIObject" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="ReplyToAddress" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="ReplyToDisplayName" type="xsd:string" />
             </xsd:sequence>
           </xsd:extension>
         </xsd:complexContent>
@@ -2703,6 +2732,9 @@
               <xsd:element minOccurs="0" maxOccurs="1" name="IsSeedListSend" type="xsd:boolean" />
               <xsd:element minOccurs="0" maxOccurs="1" name="TimeZone" type="tns:TimeZone" />
               <xsd:element minOccurs="0" maxOccurs="1" name="SeedListOccurance" type="xsd:int" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="PreHeader" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="ReplyToAddress" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="ReplyToDisplayName" type="xsd:string" />
             </xsd:sequence>
           </xsd:extension>
         </xsd:complexContent>
@@ -2980,6 +3012,21 @@
           <xsd:extension base="tns:InteractionDefinition" />
         </xsd:complexContent>
       </xsd:complexType>
+      <xsd:complexType name="MobileConnectRefreshListActivity">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:InteractionDefinition" />
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="MobileConnectSendSmsActivity">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:InteractionDefinition" />
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="MobilePushSendMessageActivity">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:InteractionDefinition" />
+        </xsd:complexContent>
+      </xsd:complexType>
       <xsd:complexType name="ReportActivity">
         <xsd:complexContent mixed="false">
           <xsd:extension base="tns:InteractionDefinition" />
@@ -3250,6 +3297,10 @@
               <xsd:element minOccurs="0" maxOccurs="1" name="StandardQuotedStrings" type="xsd:boolean" />
               <xsd:element minOccurs="0" maxOccurs="1" name="Filter" type="xsd:string" />
               <xsd:element minOccurs="0" maxOccurs="1" name="DateFormattingLocale" type="tns:Locale" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="DeleteFile" type="xsd:boolean" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="SourceObject" type="tns:APIObject" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="DestinationType" type="xsd:int" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="SubscriptionDefinitionId" type="xsd:string" />
             </xsd:sequence>
           </xsd:extension>
         </xsd:complexContent>
@@ -3294,6 +3345,7 @@
               <xsd:element minOccurs="0" maxOccurs="1" name="Description" type="xsd:string" />
               <xsd:element minOccurs="0" maxOccurs="1" name="DataSource" type="tns:APIObject" />
               <xsd:element minOccurs="0" maxOccurs="1" name="DataFilter" type="tns:FilterPart" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="CategoryID" type="xsd:int" />
             </xsd:sequence>
           </xsd:extension>
         </xsd:complexContent>
@@ -3482,6 +3534,32 @@
           </xsd:extension>
         </xsd:complexContent>
       </xsd:complexType>
+      <xsd:complexType name="Template">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:APIObject">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="TemplateName" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="LayoutHTML" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="BackgroundColor" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="BorderColor" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="BorderWidth" type="xsd:int" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="Cellpadding" type="xsd:int" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="Cellspacing" type="xsd:int" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="Width" type="xsd:int" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="Align" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="ActiveFlag" type="xsd:int" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="CategoryID" type="xsd:int" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="CategoryType" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="OwnerID" type="xsd:int" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="HeaderContent" type="tns:ContentArea" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="Layout" type="tns:Layout" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="TemplateSubject" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="IsTemplateSubjectLocked" type="xsd:boolean" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="PreHeader" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
       <xsd:complexType name="Layout">
         <xsd:complexContent mixed="false">
           <xsd:extension base="tns:APIObject">
@@ -3501,6 +3579,17 @@
               <xsd:element minOccurs="0" maxOccurs="1" name="TargetUpdateType" type="xsd:string" />
               <xsd:element minOccurs="0" maxOccurs="1" name="FileSpec" type="xsd:string" />
               <xsd:element minOccurs="0" maxOccurs="1" name="FileType" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="Status" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="CategoryID" type="xsd:int" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="HiveQueryDefinition">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:InteractionDefinition">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="QueryDefinition" type="xsd:string" />
               <xsd:element minOccurs="0" maxOccurs="1" name="Status" type="xsd:string" />
               <xsd:element minOccurs="0" maxOccurs="1" name="CategoryID" type="xsd:int" />
             </xsd:sequence>
@@ -3670,6 +3759,195 @@
           </xsd:extension>
         </xsd:complexContent>
       </xsd:complexType>
+      <xsd:complexType name="Automation">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:InteractionDefinition">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="Schedule" type="tns:ScheduleDefinition" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="AutomationTasks">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="AutomationTask" type="tns:AutomationTask" />
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="IsActive" type="xsd:boolean" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="AutomationSource" type="tns:AutomationSource" />
+              <xsd:element minOccurs="0" name="Status" type="xsd:int" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="Notifications">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="Notification" type="tns:AutomationNotification" />
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="ScheduledTime" type="xsd:dateTime" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="AutomationType" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="AutomationSource">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="AutomationSourceID" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="AutomationSourceType" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="AutomationInstances">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:APIObject">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="InstanceCount" type="xsd:int" />
+              <xsd:element minOccurs="0" name="AutomationInstanceCollection">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="AutomationInstance" type="tns:AutomationInstance" />
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="AutomationInstance">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:Automation">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="AutomationID" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="StatusMessage" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="StatusLastUpdate" type="xsd:dateTime" />
+              <xsd:element minOccurs="0" name="TaskInstances">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="AutomationTaskInstance" type="tns:AutomationTaskInstance" />
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="StartTime" type="xsd:dateTime" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="CompletedTime" type="xsd:dateTime" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="AutomationNotification">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:APIObject">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="Name" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="Description" type="xsd:string" />
+              <xsd:element minOccurs="1" maxOccurs="1" name="Address" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="Body" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="ChannelType" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="NotificationType" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="AutomationTask">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:APIObject">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="AutomationTaskType" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="Name" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="Description" type="xsd:string" />
+              <xsd:element minOccurs="0" name="Automation" type="tns:Automation" />
+              <xsd:element minOccurs="0" name="Sequence" type="xsd:int" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="Activities">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="Activity" type="tns:AutomationActivity" />
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="AutomationTaskInstance">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:AutomationTask">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="StepDefinition" type="tns:AutomationTask" />
+              <xsd:element minOccurs="0" name="AutomationInstance" type="tns:AutomationInstance" />
+              <xsd:element minOccurs="0" name="ActivityInstances">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="ActivityInstance" type="tns:AutomationActivityInstance" />
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="AutomationActivity">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:APIObject">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="Name" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="Description" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="IsActive" type="xsd:boolean" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="Definition" type="tns:APIObject" />
+              <xsd:element minOccurs="0" name="Automation" type="tns:Automation" />
+              <xsd:element minOccurs="0" name="AutomationTask" type="tns:AutomationTask" />
+              <xsd:element minOccurs="0" name="Sequence" type="xsd:int" />
+              <xsd:element minOccurs="0" name="ActivityObject" type="tns:APIObject" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="AutomationActivityInstance">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:AutomationActivity">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="ActivityID" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="AutomationID" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="SequenceID" type="xsd:int" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="Status" type="xsd:int" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="StatusLastUpdate" type="xsd:dateTime" />
+              <xsd:element minOccurs="0" name="StatusMessage" type="xsd:string" />
+              <xsd:element minOccurs="0" name="ActivityDefinition" type="tns:AutomationActivity" />
+              <xsd:element minOccurs="0" name="AutomationInstance" type="tns:AutomationInstance" />
+              <xsd:element minOccurs="0" name="AutomationTaskInstance" type="tns:AutomationTaskInstance" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="ScheduledTime" type="xsd:dateTime" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="StartTime" type="xsd:dateTime" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="CompletedTime" type="xsd:dateTime" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:simpleType name="AutomationTypes">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="scheduled" />
+          <xsd:enumeration value="triggered" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="AutomationSourceTypes">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Unknown" />
+          <xsd:enumeration value="FileTrigger" />
+          <xsd:enumeration value="UserInterface" />
+          <xsd:enumeration value="UserAPI" />
+          <xsd:enumeration value="RESTApi" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="AutomationStatus">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Error" />
+          <xsd:enumeration value="BuildingError" />
+          <xsd:enumeration value="Building" />
+          <xsd:enumeration value="Ready" />
+          <xsd:enumeration value="Running" />
+          <xsd:enumeration value="Paused" />
+          <xsd:enumeration value="Stopped" />
+          <xsd:enumeration value="Scheduled" />
+          <xsd:enumeration value="AwaitingTrigger" />
+          <xsd:enumeration value="InactiveTrigger" />
+          <xsd:enumeration value="Skipped" />
+          <xsd:enumeration value="Unknown" />
+          <xsd:enumeration value="New" />
+        </xsd:restriction>
+      </xsd:simpleType>
       <xsd:complexType name="PlatformApplication">
         <xsd:complexContent mixed="false">
           <xsd:extension base="tns:APIObject">
@@ -3731,6 +4009,7 @@
               <xsd:element minOccurs="0" maxOccurs="1" name="Send" type="tns:Send" />
               <xsd:element minOccurs="0" maxOccurs="1" name="Definition" type="tns:SuppressionListDefinition" />
               <xsd:element minOccurs="0" maxOccurs="1" name="AppliesToAllSends" type="xsd:boolean" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="SenderProfile" type="tns:SenderProfile" />
             </xsd:sequence>
           </xsd:extension>
         </xsd:complexContent>
@@ -3742,6 +4021,7 @@
           <xsd:enumeration value="SendClassification" />
           <xsd:enumeration value="Send" />
           <xsd:enumeration value="Global" />
+          <xsd:enumeration value="SenderProfile" />
         </xsd:restriction>
       </xsd:simpleType>
       <xsd:complexType name="SuppressionListData">
@@ -3755,6 +4035,17 @@
                   </xsd:sequence>
                 </xsd:complexType>
               </xsd:element>
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="SendAdditionalAttribute">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:APIObject">
+            <xsd:sequence>
+              <xsd:element minOccurs="1" maxOccurs="1" name="Email" type="tns:Email" />
+              <xsd:element minOccurs="1" maxOccurs="1" name="Name" type="xsd:string" />
+              <xsd:element minOccurs="1" maxOccurs="1" name="Value" type="xsd:string" />
             </xsd:sequence>
           </xsd:extension>
         </xsd:complexContent>
