@@ -46,13 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateAutomation.cs" />
     <Compile Include="CreateDataExtension.cs" />
     <Compile Include="CreateEmailSendDefinition.cs" />
     <Compile Include="CreateImportDefinition.cs" />
     <Compile Include="CreateTriggeredSend.cs" />
     <Compile Include="ExtractDataExtension.cs" />
+    <Compile Include="PerformAutomation.cs" />
     <Compile Include="PerformEmailSendDefinition.cs" />
     <Compile Include="PerformImportDefinition.cs" />
+    <Compile Include="RetrieveAutomation.cs" />
     <Compile Include="RetrieveImportResultsSummary.cs" />
     <Compile Include="RetrieveSend.cs" />
     <Compile Include="Service References\ExactTargetSOAPAPI\Reference.cs">
