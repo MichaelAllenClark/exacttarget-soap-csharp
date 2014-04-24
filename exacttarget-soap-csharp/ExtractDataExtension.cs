@@ -11,6 +11,7 @@ namespace exacttarget_soap_csharp
         public static void ExtractDataExtension(SoapClient soapClient, string DataExtensionCustomerKey, string FileName) {
             ExtractRequest er = new ExtractRequest();
 
+
             er.ID = "bb94a04d-9632-4623-be47-daabc3f588a6";
 
             // Always set an StartDate to the value specified
