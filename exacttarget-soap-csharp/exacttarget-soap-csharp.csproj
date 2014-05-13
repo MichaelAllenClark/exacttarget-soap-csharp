@@ -65,6 +65,7 @@
     </Compile>
     <Compile Include="Tester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UpdateAutomation.cs" />
     <Compile Include="UpdateSubscriber.cs" />
   </ItemGroup>
   <ItemGroup>
